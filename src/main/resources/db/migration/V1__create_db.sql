@@ -17,7 +17,7 @@ CREATE TABLE ticket (
                          client_id BIGINT,
                          from_planet_id VARCHAR(50),
                          to_planet_id VARCHAR(50),
-                         FOREIGN KEY (client_id) REFERENCES clients(id),
-                         FOREIGN KEY (from_planet_id) REFERENCES planets(id),
-                         FOREIGN KEY (to_planet_id) REFERENCES planets(id)
+                         FOREIGN KEY (client_id) REFERENCES client(id),
+                         FOREIGN KEY (from_planet_id) REFERENCES planet(id),
+                         FOREIGN KEY (to_planet_id) REFERENCES planet(id)
 );

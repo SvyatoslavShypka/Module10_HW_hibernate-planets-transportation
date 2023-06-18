@@ -1,5 +1,5 @@
 -- insert statements for Table 1: clients
-INSERT INTO clients (name) VALUES
+INSERT INTO client (name) VALUES
 ('Client1'),
 ('Client2'),
 ('Client3'),
@@ -13,7 +13,7 @@ INSERT INTO clients (name) VALUES
 ;
 
 -- insert statements for Table 2: planets
-INSERT INTO planets (id, name) VALUES
+INSERT INTO planet (id, name) VALUES
 ('SOLAR001', 'Mars'),
 ('SOLAR002', 'Earth'),
 ('SOLAR003', 'Jupiter'),
@@ -22,7 +22,7 @@ INSERT INTO planets (id, name) VALUES
 ;
 
 -- insert statements for Table 3: tickets
-INSERT INTO tickets (created_at, client_id, from_planet_id, to_planet_id) VALUES
+INSERT INTO ticket (created_at, client_id, from_planet_id, to_planet_id) VALUES
 ('2029-09-25 16:28:45', 4, 'SOLAR001', 'SOLAR004'),
 ('2029-09-26 16:28:45', 2, 'SOLAR004', 'SOLAR001'),
 ('2029-09-27 16:28:45', 3, 'SOLAR002', 'SOLAR005'),
