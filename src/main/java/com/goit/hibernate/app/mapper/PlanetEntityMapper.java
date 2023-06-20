@@ -1,8 +1,6 @@
 package com.goit.hibernate.app.mapper;
 
-import com.goit.hibernate.app.dto.ClientDto;
 import com.goit.hibernate.app.dto.PlanetDto;
-import com.goit.hibernate.app.entity.Client;
 import com.goit.hibernate.app.entity.Planet;
 import lombok.NoArgsConstructor;
 

@@ -2,11 +2,11 @@ package com.goit.hibernate.app.servlet;
 
 import com.goit.hibernate.app.configuration.Environment;
 import com.goit.hibernate.app.configuration.hibernate.Datasource;
-import com.goit.hibernate.app.dto.CustomerDto;
-import com.goit.hibernate.app.entity.CustomerEntity;
-import com.goit.hibernate.app.mapper.CustomerDtoMapper;
-import com.goit.hibernate.app.mapper.CustomerEntityMapper;
-import com.goit.hibernate.app.repository.CustomerEntityRepository;
+import com.goit.hibernate.app.dto.ClientDto;
+import com.goit.hibernate.app.entity.Client;
+import com.goit.hibernate.app.mapper.ClientDtoMapper;
+import com.goit.hibernate.app.mapper.ClientEntityMapper;
+import com.goit.hibernate.app.repository.ClientEntityRepository;
 import com.goit.hibernate.app.servlet.exception.HibernateAppBadRequestException;
 import com.goit.hibernate.app.servlet.exception.HibernateAppNotFoundException;
 import com.goit.hibernate.app.servlet.exception.handler.ServletExceptionHandler;
@@ -24,11 +24,11 @@ import static com.goit.hibernate.app.servlet.ServletUtils.sendJsonResponse;
 import static com.goit.hibernate.app.util.Constants.APP_ENV;
 import static java.util.Objects.isNull;
 
-public class CustomerServlet extends HttpServlet {
+public class ClientServlet extends HttpServlet {
 
-    private CustomerEntityRepository customerEntityRepository;
-    private CustomerDtoMapper dtoMapper;
-    private CustomerEntityMapper entityMapper;
+    private ClientEntityRepository clientEntityRepository;
+    private ClientDtoMapper dtoMapper;
+    private ClientEntityMapper entityMapper;
     private Gson gson;
 
     @Override
@@ -38,9 +38,9 @@ public class CustomerServlet extends HttpServlet {
                 .setPrettyPrinting()
                 .create();
         Environment environment = (Environment) config.getServletContext().getAttribute(APP_ENV);
-        customerEntityRepository = new CustomerEntityRepository(new Datasource(environment));
-        dtoMapper = CustomerDtoMapper.instance();
-        entityMapper = CustomerEntityMapper.instance();
+        clientEntityRepository = new ClientEntityRepository(new Datasource(environment));
+        dtoMapper = ClientDtoMapper.instance();
+        entityMapper = ClientEntityMapper.instance();
     }
 
     @Override
@@ -48,13 +48,13 @@ public class CustomerServlet extends HttpServlet {
         ServletExceptionHandler.builder()
                 .servletResponse(response)
                 .action(() -> {
-                    List<CustomerDto> customerDtos = resolveNumericPathVariable(request.getRequestURI())
+                    List<ClientDto> clientDtos = resolveNumericPathVariable(request.getRequestURI())
                             .map(id -> {
-                                CustomerEntity entity = customerEntityRepository.findById(id);
-                                validateIsCustomerExists(id, entity);
+                                Client entity = clientEntityRepository.findById(id);
+                                validateIsClientExists(id, entity);
                                 return List.of(entityMapper.map(entity));
-                            }).orElse(entityMapper.map(customerEntityRepository.findAll()));
-                    sendJsonResponse(response, customerDtos);
+                            }).orElse(entityMapper.map(clientEntityRepository.findAll()));
+                    sendJsonResponse(response, clientDtos);
                 })
                 .build()
                 .doAction();
@@ -66,10 +66,10 @@ public class CustomerServlet extends HttpServlet {
                 .servletResponse(response)
                 .action(() -> {
                     String json = new String(request.getInputStream().readAllBytes());
-                    CustomerDto customerDto = gson.fromJson(json, CustomerDto.class);
-                    CustomerEntity entity = dtoMapper.map(customerDto);
-                    CustomerEntity saved = customerEntityRepository.save(entity);
-                    CustomerDto mapped = entityMapper.map(saved);
+                    ClientDto clientDto = gson.fromJson(json, ClientDto.class);
+                    Client entity = dtoMapper.map(clientDto);
+                    Client saved = clientEntityRepository.save(entity);
+                    ClientDto mapped = entityMapper.map(saved);
                     sendJsonResponse(response, mapped);
                 })
                 .build()
@@ -82,11 +82,11 @@ public class CustomerServlet extends HttpServlet {
                 .servletResponse(response)
                 .action(() -> {
                     String json = new String(request.getInputStream().readAllBytes());
-                    CustomerDto customerDto = gson.fromJson(json, CustomerDto.class);
-                    validateCustomer(customerDto);
-                    CustomerEntity entity = dtoMapper.map(customerDto);
-                    CustomerEntity saved = customerEntityRepository.save(entity);
-                    CustomerDto mapped = entityMapper.map(saved);
+                    ClientDto clientDto = gson.fromJson(json, ClientDto.class);
+                    validateClient(clientDto);
+                    Client entity = dtoMapper.map(clientDto);
+                    Client saved = clientEntityRepository.save(entity);
+                    ClientDto mapped = entityMapper.map(saved);
                     sendJsonResponse(response, mapped);
                 })
                 .build()
@@ -99,22 +99,22 @@ public class CustomerServlet extends HttpServlet {
                 .servletResponse(response)
                 .action(() -> {
                     resolveNumericPathVariable(request.getRequestURI())
-                            .map(id -> customerEntityRepository.deleteById(id));
+                            .map(id -> clientEntityRepository.deleteById(id));
                     response.setStatus(HttpCode.OK);
                 })
                 .build()
                 .doAction();
     }
 
-    private static void validateCustomer(CustomerDto customerDto) {
-        if (isNull(customerDto.getId())) {
-            throw new HibernateAppBadRequestException("Customer id is required");
+    private static void validateClient(ClientDto clientDto) {
+        if (isNull(clientDto.getId())) {
+            throw new HibernateAppBadRequestException("Client id is required");
         }
     }
 
-    private static void validateIsCustomerExists(Long id, CustomerEntity entity) {
+    private static void validateIsClientExists(Long id, Client entity) {
         if (isNull(entity)) {
-            throw new HibernateAppNotFoundException("customer with id:" + id + " not found");
+            throw new HibernateAppNotFoundException("Client with id:" + id + " not found");
         }
     }
 }

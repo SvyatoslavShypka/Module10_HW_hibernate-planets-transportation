@@ -26,6 +26,17 @@ record ServletUtils() {
         return Optional.empty();
     }
 
+    public static Optional<String> resolveNumericPathVariableString(String requestURI) {
+        Pattern numericPattern = Pattern.compile("[A-Z]+[0-9]+");
+        String[] uriParts = requestURI.split("/");
+        for (String uriPart : uriParts) {
+            if (numericPattern.matcher(uriPart).matches()) {
+                return Optional.of(uriPart);
+            }
+        }
+        return Optional.empty();
+    }
+
     public static void sendJsonResponse(HttpServletResponse response, Object object) throws IOException {
         String json = GSON.toJson(object);
         response.setStatus(HttpCode.OK);

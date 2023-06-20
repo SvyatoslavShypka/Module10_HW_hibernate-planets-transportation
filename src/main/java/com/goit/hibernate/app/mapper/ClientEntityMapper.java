@@ -1,7 +1,6 @@
 package com.goit.hibernate.app.mapper;
 
 import com.goit.hibernate.app.dto.ClientDto;
-import com.goit.hibernate.app.dto.CustomerDto;
 import com.goit.hibernate.app.entity.Client;
 import lombok.NoArgsConstructor;
 

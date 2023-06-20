@@ -19,7 +19,7 @@ public class ApplicationInitServlet extends HttpServlet {
             log.info("Started configuration init");
             LoggingConfiguration.setup(environment);
             FlywayConfiguration.setup(environment).migrate();
-//            config.getServletContext().setAttribute(APP_ENV, environment);
+            config.getServletContext().setAttribute(APP_ENV, environment);
             log.info("Configuration init finished");
         } catch (Exception e) {
             log.error("Configuration init failed", e);
