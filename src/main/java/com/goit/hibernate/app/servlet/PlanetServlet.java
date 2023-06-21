@@ -19,7 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
-import static com.goit.hibernate.app.servlet.ServletUtils.*;
+import static com.goit.hibernate.app.servlet.ServletUtils.resolveNumericPathVariableString;
+import static com.goit.hibernate.app.servlet.ServletUtils.resolveNumericPathVariable;
+import static com.goit.hibernate.app.servlet.ServletUtils.sendJsonResponse;
 import static com.goit.hibernate.app.util.Constants.APP_ENV;
 import static java.util.Objects.isNull;
 

@@ -121,19 +121,6 @@
        servlet app example
     </description>
     <servlet>
-        <servlet-name>CustomerServlet</servlet-name>
-        <servlet-class>com.goit.hibernate.app.servlet.CustomerServlet</servlet-class>
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>0</param-value>
-        </init-param>
-        <init-param>
-            <param-name>listings</param-name>
-            <param-value>false</param-value>
-        </init-param>
-        <load-on-startup>10</load-on-startup>
-    </servlet>
-    <servlet>
         <servlet-name>ClientServlet</servlet-name>
         <servlet-class>com.goit.hibernate.app.servlet.ClientServlet</servlet-class>
         <init-param>
@@ -164,12 +151,6 @@
         <servlet-class>com.goit.hibernate.app.servlet.ApplicationInitServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>CustomerServlet</servlet-name>
-        <url-pattern>/customers</url-pattern>
-        <url-pattern>/customers/*</url-pattern>
-    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ClientServlet</servlet-name>

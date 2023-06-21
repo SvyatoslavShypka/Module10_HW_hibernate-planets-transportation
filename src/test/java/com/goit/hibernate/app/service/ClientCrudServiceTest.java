@@ -1,20 +1,19 @@
 package com.goit.hibernate.app.service;
 
 import com.goit.hibernate.app.HibernateApplicationTest;
-import com.goit.hibernate.app.configuration.hibernate.Datasource;
 import com.goit.hibernate.app.entity.Client;
-import com.goit.hibernate.app.entity.CustomerEntity;
 import com.goit.hibernate.app.repository.ClientEntityRepository;
-import com.goit.hibernate.app.repository.CustomerEntityRepository;
 import com.goit.hibernate.app.test.utils.TestUtils;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class ClientCrudServiceTest extends HibernateApplicationTest {
 
